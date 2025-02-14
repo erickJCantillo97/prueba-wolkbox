@@ -1,0 +1,131 @@
+#ddev-generated
+# If you remove the ddev-generated line above you
+# are responsible for maintaining this file. DDEV will not then
+# update it, for example if you add `additional_hostnames`, etc.
+
+http:
+  routers:
+    edifito-adminer-8080-http:
+      entrypoints:
+        - http-80
+      rule: HostRegexp(`^adminer-edifito\.ddev\.site$`)
+      
+      service: "edifito-adminer-8080"
+      ruleSyntax: v3
+      tls: false
+      # middlewares:
+      #   - "edifito-redirectHttps"
+    edifito-web-80-http:
+      entrypoints:
+        - http-80
+      rule: HostRegexp(`^edifito\.ddev\.site$`)
+      
+      service: "edifito-web-80"
+      ruleSyntax: v3
+      tls: false
+      # middlewares:
+      #   - "edifito-redirectHttps"
+    edifito-web-8025-http:
+      entrypoints:
+        - http-8025
+      rule: HostRegexp(`^edifito\.ddev\.site$`)
+      
+      service: "edifito-web-8025"
+      ruleSyntax: v3
+      tls: false
+      # middlewares:
+      #   - "edifito-redirectHttps"
+    edifito-web-5173-http:
+      entrypoints:
+        - http-5174
+      rule: HostRegexp(`^edifito\.ddev\.site$`)
+      
+      service: "edifito-web-5173"
+      ruleSyntax: v3
+      tls: false
+      # middlewares:
+      #   - "edifito-redirectHttps"
+    
+    
+    edifito-adminer-8080-https:
+      entrypoints:
+        - http-443
+      rule: HostRegexp(`^adminer-edifito\.ddev\.site$`)
+      
+      service: "edifito-adminer-8080"
+      ruleSyntax: v3
+      
+      tls: true
+      
+    
+    
+    
+    edifito-web-80-https:
+      entrypoints:
+        - http-443
+      rule: HostRegexp(`^edifito\.ddev\.site$`)
+      
+      service: "edifito-web-80"
+      ruleSyntax: v3
+      
+      tls: true
+      
+    edifito-web-8025-https:
+      entrypoints:
+        - http-8026
+      rule: HostRegexp(`^edifito\.ddev\.site$`)
+      
+      service: "edifito-web-8025"
+      ruleSyntax: v3
+      
+      tls: true
+      
+    edifito-web-5173-https:
+      entrypoints:
+        - http-5173
+      rule: HostRegexp(`^edifito\.ddev\.site$`)
+      
+      service: "edifito-web-5173"
+      ruleSyntax: v3
+      
+      tls: true
+      
+    
+
+  middlewares:
+    edifito-redirectHttps:
+      redirectScheme:
+        scheme: https
+        permanent: true
+
+  services:
+    edifito-adminer-8080:
+      loadbalancer:
+        servers:
+          - url: http://ddev-edifito-adminer:8080
+        
+    
+    edifito-web-80:
+      loadbalancer:
+        servers:
+          - url: http://ddev-edifito-web:80
+        
+    edifito-web-8025:
+      loadbalancer:
+        servers:
+          - url: http://ddev-edifito-web:8025
+        
+    edifito-web-5173:
+      loadbalancer:
+        servers:
+          - url: http://ddev-edifito-web:5173
+        
+    
+    
+    
+    
+
+tls:
+  certificates:
+    - certFile: /mnt/ddev-global-cache/traefik/certs/edifito.crt
+      keyFile: /mnt/ddev-global-cache/traefik/certs/edifito.key
